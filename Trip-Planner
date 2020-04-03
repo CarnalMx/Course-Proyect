@@ -1,0 +1,98 @@
+import java.util.Scanner;
+import java.lang.Math;
+
+public class TripPlanner {
+    public static void main(String[] args)  {
+        parte1();
+        parte2();
+        parte3();
+        parte4();
+        parte5();
+        System.out.println("Thanks for using our Traveling Planner.");
+
+    }
+
+    public static void parte1() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Welcome to Vacation Planner!\nWhat is your name?");
+        String name0 = input.nextLine();
+        System.out.print("Nice to meet you " + name0 + " where are you traveling to?");
+        String name1 = input.nextLine();
+        System.out.print("Great! " + name1 + " sounds like a great trip.\n");
+
+    }
+    public static void parte2() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("How many days are you going to spend travelling?");
+        String days0 = input.nextLine();
+        System.out.print("How much money, in USD, are you planning to spend on your trip?");
+        String money0 = input.nextLine();
+        System.out.print("What is the letter currency symbol for your travel destination?");
+        String currency0 = input.nextLine();
+        System.out.print("How many " + currency0 + " are in 1 USD?");
+        String currencyValue = input.nextLine();
+            /*Aqui comienza la parte 2, comenzare a convertir los Strings en enteros y dobles para poder realizar
+            * las operaciones de la siguiente seccion.             */
+            int num_1 = Integer.parseInt(days0);
+            int num_2 = Integer.parseInt(money0);
+            int num_3 = Integer.parseInt(currencyValue);
+            int horas = num_1 * 24;
+            int minutos = horas * 60;
+            int money1 = num_2 / num_1;
+            int currencyMoney = num_3 * num_2;
+            int dineroPorDia = currencyMoney / num_1;
+            System.out.print("\nIf you are travelling for " + days0 + " days that is the same  as " + horas + " hours or " + minutos + " minutes ");
+            System.out.print(" \nIf you are goind to spend $" + money0 + " USD that means per day you can spend up to " + money1 + " USD ");
+            System.out.print("\nYour total budget in " + currency0 + " is " + currencyMoney + " " + currency0 + ", which per day is " + dineroPorDia + " " + currency0);
+
+
+    }
+    public static void parte3() {
+        int nightHome = 0;
+        int midDayHome = 12;
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nWhat is the time difference, in hours, between your home at your destination? ");
+        int timeDif = input.nextInt();
+        int travelNightDif = nightHome + timeDif;
+        int travelDayDif = midDayHome + timeDif;
+        System.out.println("That means that when it is midnight at home it will be " + travelNightDif + ":00 in your travel destination. \nAnd when it is noon at home it will be " + travelDayDif + ":00");
+
+    }
+    public static void parte4() {
+        Scanner input = new Scanner(System.in);
+        double km_2 = 1.00;
+        double mile_2 = km_2 * 0.38;
+        System.out.println("\nWhat is the square area of your destination country in km2? ");
+        String distanceKm = input.nextLine();
+        int km_3 = Integer.parseInt(distanceKm);
+        double result = mile_2 * km_3;
+        System.out.println("\nIn miles2 that is " + result);
+
+    }
+    public static void parte5()    {
+        Scanner input = new Scanner(System.in);
+        final int R = 6371; //El radio de la tierra
+        System.out.println("\nWhat is the latitude of your home? ");
+        double lat1 = input.nextDouble();
+        System.out.println("\nWhat is your longitude? ");
+        double lon1 = input.nextDouble();
+        System.out.println("\nWhat its the latitude from ur destiny?");
+        double lat2 = input.nextDouble();
+        System.out.println("\nWhat its the longitude from ur destiny?");
+        double lon2 = input.nextDouble();
+        double latDistance = toRad(lat2-lat1);
+        double lonDiscance = toRad(lon2-lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) +
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                        Math.sin(lonDiscance / 2) * Math.sin(lonDiscance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double distance = R * c;
+
+        System.out.println("The distance between two lat and long is:" + distance + " KM");
+
+    }
+    private static Double toRad(Double value) {
+        return value * Math.PI / 180;
+    }
+
+}
